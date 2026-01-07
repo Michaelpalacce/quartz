@@ -34,41 +34,61 @@ export default ((opts?: ParentBreadcrumbsOptions) => {
 
 		const findFile = (name: string) => {
 			const targetSlug = simplifySlug(name as FullSlug);
-
 			return allFiles.find((f: QuartzPluginData) => {
 				const fSlug = simplifySlug(f.slug!);
 				return fSlug === targetSlug || fSlug.endsWith(targetSlug) || f.frontmatter?.title === name;
 			});
 		};
 
-		const crumbs: Array<{ displayName: string; path: string; }> = [];
+		type BreadcrumbNode = { displayName: string; path: string; };
+		const crumbs: Array<BreadcrumbNode[]> = [];
+
 		let current = fileData;
 		const visited = new Set<string>();
 		if (current.slug) visited.add(current.slug);
 
 		while (current && current.frontmatter?.parent) {
-			const parentLink = parseWikiLink(current.frontmatter.parent as string);
-			const parentFile = findFile(parentLink);
+			const rawParent = current.frontmatter.parent;
+			const parentList = Array.isArray(rawParent) ? rawParent : [rawParent];
 
-			if (parentFile && parentFile.slug && !visited.has(parentFile.slug)) {
-				visited.add(parentFile.slug);
-				crumbs.push({
-					displayName: options.resolveFrontmatterTitle
-						? parentFile.frontmatter?.title ?? parentFile.slug
-						: parentFile.slug,
-					path: resolveRelative(fileData.slug!, parentFile.slug!)
-				});
-				current = parentFile;
+			const currentLevelNodes: BreadcrumbNode[] = [];
+			let nextParent: QuartzPluginData | undefined = undefined;
+
+			for (const p of parentList) {
+				const linkStr = parseWikiLink(p as string);
+				const parentFile = findFile(linkStr);
+
+				if (parentFile && parentFile.slug) {
+					currentLevelNodes.push({
+						displayName: options.resolveFrontmatterTitle
+							? parentFile.frontmatter?.title ?? parentFile.slug
+							: parentFile.slug,
+						path: resolveRelative(fileData.slug!, parentFile.slug!)
+					});
+
+					if (!nextParent && !visited.has(parentFile.slug)) {
+						nextParent = parentFile;
+					}
+				}
+			}
+
+			if (currentLevelNodes.length > 0) {
+				crumbs.push(currentLevelNodes);
+			}
+
+			if (nextParent) {
+				visited.add(nextParent.slug!);
+				current = nextParent;
 			} else {
 				break;
 			}
 		}
 
 		if (current.slug !== "index") {
-			crumbs.push({
+			crumbs.push([{
 				displayName: options.rootName!,
 				path: resolveRelative(fileData.slug!, "index" as SimpleSlug)
-			});
+			}]);
 		}
 
 		crumbs.reverse();
@@ -79,10 +99,15 @@ export default ((opts?: ParentBreadcrumbsOptions) => {
 
 		return (
 			<nav class={classNames(displayClass, "breadcrumb-container")} aria-label="breadcrumbs">
-				{crumbs.map((crumb, index) => (
+				{crumbs.map((crumbLevel, levelIndex) => (
 					<div class="breadcrumb-element">
-						<a href={crumb.path}>{crumb.displayName}</a>
-						{index !== crumbs.length && <p>{options.spacerSymbol}</p>}
+						{crumbLevel.map((node, nodeIndex) => (
+							<>
+								<a href={node.path}>{node.displayName}</a>
+								{nodeIndex < crumbLevel.length - 1 && <span style={{ opacity: 0.5 }}> / </span>}
+							</>
+						))}
+						{levelIndex !== crumbs.length && <p>{options.spacerSymbol}</p>}
 					</div>
 				))}
 				<div class="breadcrumb-element">
@@ -94,4 +119,4 @@ export default ((opts?: ParentBreadcrumbsOptions) => {
 
 	ParentBreadcrumbs.css = style;
 	return ParentBreadcrumbs;
-}) satisfies QuartzComponentConstructor
+}) satisfies QuartzComponentConstructor;
