@@ -39,14 +39,14 @@ const config: QuartzConfig = {
 				},
 				darkMode: {
 					light: "#1e1e2e", // Background
-					lightgray: "#b4befe", // Borders
-					gray: "#cba6f7", // Search
+					lightgray: "#cdd6f4", // Borders
+					gray: "#fab387", // Search
 					darkgray: "#a6adc8", // Text
-					dark: "#9399b2", // Sidebar Links
-					secondary: "#cba6f7", // Bold Links
-					tertiary: "#cba6f7", // Selected Sidebar
+					dark: "#cdd6f4", // Sidebar Links
+					secondary: "#fab387", // Bold Links
+					tertiary: "#fab387", // Selected Sidebar
 					highlight: "#1e1e2e", // links
-					textHighlight: "#ffffff", // no clue
+					textHighlight: "#cdd6f4", // no clue
 				},
 			},
 		},
