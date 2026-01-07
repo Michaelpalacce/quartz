@@ -24,8 +24,10 @@ import Comments from "./Comments";
 import Flex from "./Flex";
 import ConditionalRender from "./ConditionalRender";
 import ParentBreadcrumbs from "./ParentBreadcrumbs";
+import PageProperties from "./PageProperties";
 
 export {
+	PageProperties,
 	ParentBreadcrumbs,
 	ArticleTitle,
 	Content,
