@@ -33,3 +33,59 @@ Want to customize it even more?
 - Component: `quartz/components/Breadcrumbs.tsx`
 - Style: `quartz/components/styles/breadcrumbs.scss`
 - Script: inline at `quartz/components/Breadcrumbs.tsx`
+
+## Using A Frontmatter Prop
+
+ParentBreadcrumbs` is an alternative breadcrumbs component that derives its hierarchy **entirely from frontmatter-defined parent relationships**, rather than folder structure. This is useful for knowledge-base–style sites, wikis, or any content where pages may belong to multiple logical hierarchies.
+
+Unlike the default `Breadcrumbs` component, `ParentBreadcrumbs` supports:
+
+- Explicit parent chains via frontmatter
+- Multiple parents per level
+- Wiki-style links (`[[Page Name]]`)
+- Customizable frontmatter keys
+
+### How It Works
+
+`ParentBreadcrumbs` walks upward through a parent chain starting from the current page, following a configurable frontmatter field.  
+At each level, **all parents are rendered**, while one unvisited parent is chosen to continue the chain upward.
+
+Example frontmatter:
+
+```yaml
+---
+title: "Advanced Topics"
+parent: Basics
+---
+```
+
+Wiki links are supported:
+
+```yaml
+parent: [[Basics]]
+```
+
+Multiple parents:
+
+```yaml
+parent:
+- [[Basics]]
+- [[Reference]]
+```
+
+### Configuration
+
+You can configure `ParentBreadcrumbs` by passing options into `Component.ParentBreadcrumbs()`.
+
+Default configuration:
+
+```ts
+Component.ParentBreadcrumbs({
+  spacerSymbol: "❯",            // symbol displayed between breadcrumb levels
+  rootName: "Home",             // label for the root (index) page
+  resolveFrontmatterTitle: true, // use frontmatter.title instead of slug
+  parentKey: "parent",          // frontmatter key used to resolve parents
+})
+```
+
+All options are optional; omitted values fall back to the defaults.
