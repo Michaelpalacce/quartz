@@ -8,16 +8,19 @@ interface ParentBreadcrumbsOptions {
 	spacerSymbol?: string;
 	rootName?: string;
 	resolveFrontmatterTitle?: boolean;
+	frontmatterProp?: string,
 }
 
 const defaultOptions: ParentBreadcrumbsOptions = {
 	spacerSymbol: "❯",
 	rootName: "Home",
 	resolveFrontmatterTitle: true,
+	frontmatterProp: "parent",
 };
 
 export default ((opts?: ParentBreadcrumbsOptions) => {
 	const options = { ...defaultOptions, ...opts };
+	const parentKey = options.frontmatterProp;
 
 	const ParentBreadcrumbs: QuartzComponent = ({
 		fileData,
@@ -47,8 +50,8 @@ export default ((opts?: ParentBreadcrumbsOptions) => {
 		const visited = new Set<string>();
 		if (current.slug) visited.add(current.slug);
 
-		while (current && current.frontmatter?.parent) {
-			const rawParent = current.frontmatter.parent;
+		while (current && current.frontmatter?.[parentKey!]) {
+			const rawParent = current.frontmatter[parentKey!];
 			const parentList = Array.isArray(rawParent) ? rawParent : [rawParent];
 
 			const currentLevelNodes: BreadcrumbNode[] = [];
