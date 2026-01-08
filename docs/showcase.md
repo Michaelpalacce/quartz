@@ -21,3 +21,4 @@ Want to see what Quartz can do? Here are some cool community gardens:
 - [Ellie's Notes](https://ellie.wtf)
 - [Eledah's Crystalline](https://blog.eledah.ir/)
 - [🌓 Projects & Privacy - FOSS, tech, law](https://be-far.com)
+- [🌲Stefan Genov's Garden](https://garden.sgenov.dev)
