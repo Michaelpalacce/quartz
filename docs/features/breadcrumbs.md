@@ -69,8 +69,8 @@ Multiple parents:
 
 ```yaml
 parent:
-- [[Basics]]
-- [[Reference]]
+  - [[Basics]]
+  - [[Reference]]
 ```
 
 ### Configuration
@@ -81,10 +81,10 @@ Default configuration:
 
 ```ts
 Component.ParentBreadcrumbs({
-  spacerSymbol: "❯",            // symbol displayed between breadcrumb levels
-  rootName: "Home",             // label for the root (index) page
+  spacerSymbol: "❯", // symbol displayed between breadcrumb levels
+  rootName: "Home", // label for the root (index) page
   resolveFrontmatterTitle: true, // use frontmatter.title instead of slug
-  parentKey: "parent",          // frontmatter key used to resolve parents
+  parentKey: "parent", // frontmatter key used to resolve parents
 })
 ```
 
