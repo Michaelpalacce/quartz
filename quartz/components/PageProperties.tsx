@@ -41,10 +41,12 @@ function renderInternalLink(
   const full = getFullInternalLink(href, simplifySlug(props.fileData.slug!))
 
   const exists = props.ctx.allSlugs && props.ctx.allSlugs.includes(full)
-  const className = exists ? "internal" : "internal broken"
+  if (!exists) {
+    return <a class="internal broken">{text}</a>
+  }
 
   return (
-    <a class={className} href={href} data-slug={full}>
+    <a class="internal" href={href} data-slug={full}>
       {text}
     </a>
   )
