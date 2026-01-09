@@ -52,8 +52,6 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
 	return {
 		name: "LinkProcessing",
 		htmlPlugins(ctx) {
-			const validSlugs = new Set(ctx.allSlugs.map((slug) => simplifySlug(slug)));
-
 			return [
 				() => {
 					return (tree: Root, file) => {
@@ -109,7 +107,7 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
 									// Add the 'alias' class if the text content is not the same as the href
 									classes.push("alias");
 								}
-
+								node.properties.className = classes;
 
 								if (isExternal && opts.openLinksInNewTab) {
 									node.properties.target = "_blank";
@@ -130,13 +128,7 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
 									const simple = simplifySlug(full);
 									outgoing.add(simple);
 									node.properties["data-slug"] = full;
-
-									if (!validSlugs.has(simple)) {
-										classes.push("broken");
-									}
 								}
-
-								node.properties.className = classes;
 
 								// rewrite link internals if prettylinks is on
 								if (
