@@ -112,8 +112,9 @@ export const HIDE = () => null;
 
 const defaultOptions: PagePropertiesOptions = {
 	fieldComponents: {
-		title: HIDE,
-		date: HIDE,
+		created: HIDE,
+		modified: HIDE,
+		published: HIDE,
 		cssclasses: HIDE,
 		tags: TagFieldComponent,
 		["hide-props"]: HIDE,
