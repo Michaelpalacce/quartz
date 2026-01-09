@@ -116,6 +116,7 @@ const defaultOptions: PagePropertiesOptions = {
     modified: HIDE,
     published: HIDE,
     cssclasses: HIDE,
+    publish: HIDE,
     tags: TagFieldComponent,
     ["hide-props"]: HIDE,
   },
