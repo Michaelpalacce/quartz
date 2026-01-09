@@ -40,12 +40,28 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.DesktopOnly(Component.TableOfContents()),
+    Component.Explorer({
+      folderDefaultState: "collapsed",
+    }),
   ],
   right: [
     Component.Graph(),
-    Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    Component.Comments({
+      provider: "giscus",
+      options: {
+        repo: "Michaelpalacce/garden",
+        // from data-repo-id
+        repoId: "R_kgDOQ1g8lQ",
+        // from data-category
+        category: "Announcements",
+        // from data-category-id
+        categoryId: "DIC_kwDOQ1g8lc4C0xPD",
+        // from data-lang
+        lang: "en",
+      },
+    }),
   ],
 }
 
