@@ -361,7 +361,7 @@ h5,
 h6,
 thead {
   font-family: var(--headerFont);
-  color: var(--dark);
+  color: #f38ba8;
   font-weight: revert;
   margin-bottom: 0;
 
@@ -508,7 +508,7 @@ code {
   font-family: var(--codeFont);
   border-radius: 5px;
   padding: 0.1rem 0.2rem;
-  background: var(--lightgray);
+  background: #11111b;
 }
 
 tbody,

@@ -28,7 +28,7 @@ const config: QuartzConfig = {
       colors: {
         lightMode: {
           light: "#1e1e2e", // Background
-          lightgray: "#181825", // Borders and '``'
+          lightgray: "#fab387", // Borders and '``'
           gray: "#b4befe", // Search, Graph Links, Heavier Borders
           darkgray: "#cdd6f4", // Text
           dark: "#cdd6f4", // Sidebar Links and Bold Text
@@ -39,7 +39,7 @@ const config: QuartzConfig = {
         },
         darkMode: {
           light: "#1e1e2e", // Background
-          lightgray: "#181825", // Borders and '``'
+          lightgray: "#fab387", // Borders and '``'
           gray: "#b4befe", // Search, Graph Links, Heavier Borders
           darkgray: "#cdd6f4", // Text
           dark: "#cdd6f4", // Sidebar Links and Bold Text
