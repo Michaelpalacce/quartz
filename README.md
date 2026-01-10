@@ -4,6 +4,10 @@ This is a fork with additional functionality to make it so it works for my vault
 
 I build the image, then I use the image in: https://github.com/Michaelpalacce/garden/blob/main/Dockerfile
 
+Added:
+- ParentBreadcrumbs
+- PageProperties
+
 # Quartz v4
 
 > “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
