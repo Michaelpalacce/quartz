@@ -17,7 +17,21 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
+        with:
+          # Fetch all history so we can find the latest tag
+          fetch-depth: 0
+
+      - name: Get Latest Tag and Set Version
+        id: vars
+        run: |
+          # Because I can't be bothered with renovate and matching.. make sure latest tag is only MAJOR.MINOR
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+          TIMESTAMP=$(date +%s)
+          FULL_VERSION="${LATEST_TAG}.${TIMESTAMP}"
+          echo "tag=${LATEST_TAG}" >> $GITHUB_OUTPUT
+          echo "taggedDate=${FULL_VERSION}" >> $GITHUB_OUTPUT
+          echo "Using version: ${FULL_VERSION}"
 
       # Setup QEMU
       # https://github.com/marketplace/actions/docker-setup-buildx#with-qemu
@@ -39,8 +53,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: |
-            ghcr.io/Michaelpalacce/quartz
+          images: ghcr.io/Michaelpalacce/quartz
+          tags: |
+            type=raw,value=${{ steps.vars.outputs.tag }}
+            type=raw,value=${{ steps.vars.outputs.taggedDate }}
+            type=raw,value=latest
 
       - name: Build and push Docker image
         id: build-and-push
