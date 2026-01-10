@@ -2,8 +2,6 @@
 
 This is a fork with additional functionality to make it so it works for my vault specifically.
 
-I build the image, then I use the image in: https://github.com/Michaelpalacce/garden/blob/main/Dockerfile
-
 Added:
 - ParentBreadcrumbs
 - PageProperties
