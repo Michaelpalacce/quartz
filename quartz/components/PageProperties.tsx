@@ -55,7 +55,7 @@ function renderInternalLink(
 export const DefaultFieldComponent: FieldComponent = (props) => {
   const { fieldValue } = props
   if (fieldValue === null) {
-    return "null"
+    return null
   }
   if (fieldValue === undefined) {
     return null
