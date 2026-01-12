@@ -79,6 +79,7 @@ article {
 
 strong {
   font-weight: $semiBoldWeight;
+  color: #89b4fa;
 }
 
 a {
@@ -116,6 +117,14 @@ a {
       &::before {
         content: "#";
       }
+
+      color: #cdd6f4;
+      border: 1px solid #cdd6f4;
+      border-radius: 10px;
+      padding: 0 5px;
+      overflow-y: hidden;
+      box-sizing: border-box;
+      font-weight: $normalWeight;
     }
   }
 
@@ -184,7 +193,7 @@ a {
     }
 
     p > strong {
-      color: var(--dark);
+      color: #89b4fa;
     }
   }
 
@@ -563,6 +572,10 @@ img {
 p > img + em {
   display: block;
   transform: translateY(-1rem);
+}
+
+em {
+  color: #cba6f7 !important;
 }
 
 hr {

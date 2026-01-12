@@ -1,5 +1,20 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { ColorScheme } from "./quartz/util/theme"
+
+const theme: ColorScheme = {
+  light: "#1e1e2e", // Background
+  lightgray: "#fab387", // Borders and '``'
+  gray: "#b4befe", // Search, Graph Links, Heavier Borders
+  darkgray: "#cdd6f4", // Text
+  dark: "#cdd6f4", // Sidebar Links
+  secondary: "#fab387", // Links
+  tertiary: "#89b4fa", // Selected Sidebar + Hover
+  highlight: "#00000000", // links (transparent)
+  textHighlight: "#11111b", // no clue
+  strong: "#89b4fa", // Bold text
+  italics: "#cba6f7",
+}
 
 /**
  * Quartz 4 Configuration
@@ -26,28 +41,8 @@ const config: QuartzConfig = {
         code: "IBM Plex Mono",
       },
       colors: {
-        lightMode: {
-          light: "#1e1e2e", // Background
-          lightgray: "#fab387", // Borders and '``'
-          gray: "#b4befe", // Search, Graph Links, Heavier Borders
-          darkgray: "#cdd6f4", // Text
-          dark: "#cdd6f4", // Sidebar Links and Bold Text
-          secondary: "#fab387", // Links
-          tertiary: "#89b4fa", // Selected Sidebar + Hover
-          highlight: "#00000000", // links (transparent)
-          textHighlight: "#11111b", // no clue
-        },
-        darkMode: {
-          light: "#1e1e2e", // Background
-          lightgray: "#fab387", // Borders and '``'
-          gray: "#b4befe", // Search, Graph Links, Heavier Borders
-          darkgray: "#cdd6f4", // Text
-          dark: "#cdd6f4", // Sidebar Links and Bold Text
-          secondary: "#fab387", // Links
-          tertiary: "#89b4fa", // Selected Sidebar + Hover
-          highlight: "#00000000", // links (transparent)
-          textHighlight: "#11111b", // no clue
-        },
+        lightMode: theme,
+        darkMode: theme,
       },
     },
   },
