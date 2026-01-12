@@ -38,7 +38,11 @@ export default ((opts?: ParentBreadcrumbsOptions) => {
       const targetSlug = simplifySlug(name as FullSlug)
       return allFiles.find((f: QuartzPluginData) => {
         const fSlug = simplifySlug(f.slug!)
-        return fSlug === targetSlug || fSlug.endsWith(targetSlug) || f.frontmatter?.title === name
+        return (
+          fSlug === targetSlug ||
+          fSlug.normalize() == targetSlug.normalize() ||
+          f.frontmatter?.title === name
+        )
       })
     }
 
